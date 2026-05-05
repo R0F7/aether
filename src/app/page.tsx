@@ -1,3 +1,15 @@
-export default function Home() {
-  return <h1>Home</h1>;
+import { HeroCarousel } from "@/components/hero-carousel";
+import { collections } from "@/lib/mock-data";
+import {getCollection} from "@/lib/db";
+
+
+export default async function Home() {
+  const collection = await getCollection("collections");
+
+
+  return (
+    <>
+      <HeroCarousel collections={collections}></HeroCarousel>
+    </>
+  );
 }

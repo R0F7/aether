@@ -62,11 +62,13 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <SiteHeader></SiteHeader>
-          
-          <div className="min-h-screen">{children}</div>
+          <div className="min-h-screen flex flex-col">
+            <SiteHeader></SiteHeader>
 
-          <SiteFooter></SiteFooter>
+            <main className="flex-1">{children}</main>
+
+            <SiteFooter></SiteFooter>
+          </div>
         </ThemeProvider>
       </body>
     </html>
