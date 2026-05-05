@@ -4,6 +4,7 @@ import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
@@ -55,9 +56,18 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`font-sans antialiased ${_playfair.variable}`}>
-        <SiteHeader></SiteHeader>
-        <div className="min-h-screen">{children}</div>
-        <SiteFooter></SiteFooter>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <SiteHeader></SiteHeader>
+          
+          <div className="min-h-screen">{children}</div>
+
+          <SiteFooter></SiteFooter>
+        </ThemeProvider>
       </body>
     </html>
   );

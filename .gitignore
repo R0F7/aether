@@ -16,9 +16,13 @@
 # next.js
 /.next/
 /out/
+/raf/
 
 # production
 /build
+
+# custom folders
+src/raf/
 
 # misc
 .DS_Store

@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { FooterLink } from "./footer-link";
 
 export function SiteFooter() {
@@ -53,18 +52,12 @@ export function SiteFooter() {
             © 2025 AETHER. All rights reserved.
           </p>
           <nav className="flex gap-6">
-            <Link
-              href="#"
-              className="text-xs text-muted-foreground hover:text-foreground transition-colors"
-            >
+            <FooterLink path="#" isTextSizeSM={false}>
               Privacy Policy
-            </Link>
-            <Link
-              href="#"
-              className="text-xs text-muted-foreground hover:text-foreground transition-colors"
-            >
+            </FooterLink>
+            <FooterLink path="#" isTextSizeSM={false}>
               Terms of Service
-            </Link>
+            </FooterLink>
           </nav>
         </div>
       </div>
