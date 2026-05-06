@@ -9,6 +9,7 @@ import { HeroSkeleton } from "@/components/hero-skeleton";
 export default function Home() {
   const collectionsPromise = getCollections();
 
+  // re-setup vercel env
   return (
     <>
       {/* Hero Carousel */}
