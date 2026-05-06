@@ -16,7 +16,7 @@ export interface Product {
 }
 
 export interface Collection {
-  id: string
+  _id: string
   name: string
   subtitle: string
   image: string
@@ -25,21 +25,21 @@ export interface Collection {
 
 export const collections: Collection[] = [
   {
-    id: "1",
+    _id: "1",
     name: "Autumn Essence",
     subtitle: "Embrace the season's warmth",
     image: "/luxury-autumn-fashion-collection-dark-moody.jpg",
     slug: "autumn-essence",
   },
   {
-    id: "2",
+    _id: "2",
     name: "Minimal Form",
     subtitle: "Purity in design",
     image: "/minimalist-luxury-fashion-white-clean-aesthetic.jpg",
     slug: "minimal-form",
   },
   {
-    id: "3",
+    _id: "3",
     name: "Urban Edge",
     subtitle: "Contemporary sophistication",
     image: "/urban-luxury-streetwear-fashion-dark-elegant.jpg",

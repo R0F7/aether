@@ -1,41 +1,43 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import Image from "next/image"
-import Link from "next/link"
-import { ChevronLeft, ChevronRight } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
-import type { Collection } from "@/lib/mock-data"
+import * as React from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import type { Collection } from "@/lib/mock-data";
 
 interface HeroCarouselProps {
-  collections: Collection[]
+  collections: Collection[];
 }
 
 export function HeroCarousel({ collections }: HeroCarouselProps) {
-  const [currentIndex, setCurrentIndex] = React.useState(0)
-  const [isAutoPlaying, setIsAutoPlaying] = React.useState(true)
+  const [currentIndex, setCurrentIndex] = React.useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = React.useState(true);
 
   const nextSlide = React.useCallback(() => {
-    setCurrentIndex((prev) => (prev + 1) % collections.length)
-  }, [collections.length])
+    setCurrentIndex((prev) => (prev + 1) % collections.length);
+  }, [collections.length]);
 
   const prevSlide = React.useCallback(() => {
-    setCurrentIndex((prev) => (prev - 1 + collections.length) % collections.length)
-  }, [collections.length])
+    setCurrentIndex(
+      (prev) => (prev - 1 + collections.length) % collections.length,
+    );
+  }, [collections.length]);
 
   const goToSlide = (index: number) => {
-    setCurrentIndex(index)
-    setIsAutoPlaying(false)
+    setCurrentIndex(index);
+    setIsAutoPlaying(false);
     // Resume autoplay after 5 seconds
-    setTimeout(() => setIsAutoPlaying(true), 5000)
-  }
+    setTimeout(() => setIsAutoPlaying(true), 5000);
+  };
 
   React.useEffect(() => {
-    if (!isAutoPlaying) return
-    const interval = setInterval(nextSlide, 5000)
-    return () => clearInterval(interval)
-  }, [isAutoPlaying, nextSlide])
+    if (!isAutoPlaying) return;
+    const interval = setInterval(nextSlide, 5000);
+    return () => clearInterval(interval);
+  }, [isAutoPlaying, nextSlide]);
 
   return (
     <section
@@ -47,7 +49,7 @@ export function HeroCarousel({ collections }: HeroCarouselProps) {
       <div className="relative h-full">
         {collections.map((collection, index) => (
           <div
-            key={collection.id}
+            key={collection._id}
             className={cn(
               "absolute inset-0 transition-opacity duration-700",
               index === currentIndex ? "opacity-100 z-10" : "opacity-0 z-0",
@@ -58,9 +60,10 @@ export function HeroCarousel({ collections }: HeroCarouselProps) {
             aria-hidden={index !== currentIndex}
           >
             <Image
-              src={collection.image || "/placeholder.svg"}
+              src={collection.image}
               alt={collection.name}
               fill
+              loading="eager"
               className="object-cover"
               priority={index === 0}
               sizes="100vw"
@@ -71,8 +74,12 @@ export function HeroCarousel({ collections }: HeroCarouselProps) {
             {/* Content */}
             <div className="absolute inset-0 flex flex-col items-center justify-end pb-20 lg:pb-32 px-6">
               <div className="text-center max-w-2xl">
-                <p className="text-xs tracking-[0.3em] text-muted-foreground uppercase mb-4">{collection.subtitle}</p>
-                <h2 className="font-serif text-4xl lg:text-6xl tracking-wide mb-6 text-balance">{collection.name}</h2>
+                <p className="text-xs tracking-[0.3em] text-muted-foreground uppercase mb-4">
+                  {collection.subtitle}
+                </p>
+                <h2 className="font-serif text-4xl lg:text-6xl tracking-wide mb-6 text-balance">
+                  {collection.name}
+                </h2>
                 <Link href={`/shop?collection=${collection.slug}`}>
                   <Button
                     variant="outline"
@@ -92,11 +99,11 @@ export function HeroCarousel({ collections }: HeroCarouselProps) {
       <Button
         variant="ghost"
         size="icon"
-        className="absolute left-4 lg:left-10 top-1/2 -translate-y-1/2 z-20 h-12 w-12 rounded-full bg-background/10 backdrop-blur-sm hover:bg-background/30 transition-all"
+        className="absolute left-4 lg:left-10 top-1/2 -translate-y-1/2 z-20 h-12 w-12 rounded-full bg-background/10 backdrop-blur-sm hover:bg-accent transition-all"
         onClick={() => {
-          prevSlide()
-          setIsAutoPlaying(false)
-          setTimeout(() => setIsAutoPlaying(true), 5000)
+          prevSlide();
+          setIsAutoPlaying(false);
+          setTimeout(() => setIsAutoPlaying(true), 5000);
         }}
         aria-label="Previous slide"
       >
@@ -105,11 +112,11 @@ export function HeroCarousel({ collections }: HeroCarouselProps) {
       <Button
         variant="ghost"
         size="icon"
-        className="absolute right-4 lg:right-10 top-1/2 -translate-y-1/2 z-20 h-12 w-12 rounded-full bg-background/10 backdrop-blur-sm hover:bg-background/30 transition-all"
+        className="absolute right-4 lg:right-10 top-1/2 -translate-y-1/2 z-20 h-12 w-12 rounded-full bg-background/10 backdrop-blur-sm hover:bg-accent transition-all"
         onClick={() => {
-          nextSlide()
-          setIsAutoPlaying(false)
-          setTimeout(() => setIsAutoPlaying(true), 5000)
+          nextSlide();
+          setIsAutoPlaying(false);
+          setTimeout(() => setIsAutoPlaying(true), 5000);
         }}
         aria-label="Next slide"
       >
@@ -128,7 +135,9 @@ export function HeroCarousel({ collections }: HeroCarouselProps) {
             onClick={() => goToSlide(index)}
             className={cn(
               "w-2 h-2 rounded-full transition-all",
-              index === currentIndex ? "bg-foreground w-8" : "bg-foreground/30 hover:bg-foreground/50",
+              index === currentIndex
+                ? "bg-foreground w-8"
+                : "bg-foreground/30 hover:bg-foreground/50",
             )}
             role="tab"
             aria-selected={index === currentIndex}
@@ -137,5 +146,5 @@ export function HeroCarousel({ collections }: HeroCarouselProps) {
         ))}
       </div>
     </section>
-  )
+  );
 }
