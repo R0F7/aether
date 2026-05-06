@@ -1,5 +1,6 @@
 "use server";
 
+import { getCollection } from "../db";
 import { ProductValidationSchema } from "../validationSchema/productValidationSchema";
 
 export async function createProductAction(prevState: any, formData: FormData) {

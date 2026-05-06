@@ -5,6 +5,7 @@ import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "@/components/ui/sonner";
 
 const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
@@ -69,6 +70,7 @@ export default function RootLayout({
 
             <SiteFooter></SiteFooter>
           </div>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
