@@ -1,5 +1,5 @@
 export interface Product {
-  id: string
+  _id: string
   name: string
   slug: string
   price: number
@@ -49,7 +49,7 @@ export const collections: Collection[] = [
 
 export const products: Product[] = [
   {
-    id: "1",
+    _id: "1",
     name: "Cashmere Blend Overcoat",
     slug: "cashmere-blend-overcoat",
     price: 1250,
@@ -72,7 +72,7 @@ export const products: Product[] = [
     isNew: false,
   },
   {
-    id: "2",
+    _id: "2",
     name: "Silk Twill Shirt",
     slug: "silk-twill-shirt",
     price: 485,
@@ -92,7 +92,7 @@ export const products: Product[] = [
     isNew: true,
   },
   {
-    id: "3",
+    _id: "3",
     name: "Wool Tailored Trousers",
     slug: "wool-tailored-trousers",
     price: 595,
@@ -111,7 +111,7 @@ export const products: Product[] = [
     isNew: false,
   },
   {
-    id: "4",
+    _id: "4",
     name: "Leather Tote Bag",
     slug: "leather-tote-bag",
     price: 890,
@@ -130,7 +130,7 @@ export const products: Product[] = [
     isNew: false,
   },
   {
-    id: "5",
+    _id: "5",
     name: "Merino Knit Sweater",
     slug: "merino-knit-sweater",
     price: 425,
@@ -145,7 +145,7 @@ export const products: Product[] = [
     isNew: true,
   },
   {
-    id: "6",
+    _id: "6",
     name: "Linen Relaxed Shirt",
     slug: "linen-relaxed-shirt",
     price: 345,
@@ -160,7 +160,7 @@ export const products: Product[] = [
     isNew: false,
   },
   {
-    id: "7",
+    _id: "7",
     name: "Cotton Chino Trousers",
     slug: "cotton-chino-trousers",
     price: 295,
@@ -175,7 +175,7 @@ export const products: Product[] = [
     isNew: false,
   },
   {
-    id: "8",
+    _id: "8",
     name: "Wool Blazer",
     slug: "wool-blazer",
     price: 895,
@@ -190,7 +190,7 @@ export const products: Product[] = [
     isNew: true,
   },
   {
-    id: "9",
+    _id: "9",
     name: "Leather Belt",
     slug: "leather-belt",
     price: 245,
@@ -205,7 +205,7 @@ export const products: Product[] = [
     isNew: false,
   },
   {
-    id: "10",
+    _id: "10",
     name: "Quilted Vest",
     slug: "quilted-vest",
     price: 650,

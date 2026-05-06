@@ -1,25 +1,26 @@
-import { HeroCarousel } from "@/components/hero-carousel";
 import Newsletter from "@/components/newsletter";
-import { getCollection } from "@/lib/db";
+import BrandStatement from "@/components/brand-statement";
+import { Suspense } from "react";
+import { getCollections } from "@/lib/data";
+import { FeaturedProductsWrapper } from "@/components/featured-products-wrapper";
+import { HeroCarouselWrapper } from "@/components/hero-carousel-wrapper";
+import { HeroSkeleton } from "@/components/hero-skeleton";
 
-export default async function Home() {
-  const collection = await getCollection("collections");
-  const result = await collection?.find().toArray();
-
-  const collections = result
-    ? result.map((item) => ({
-        _id: item._id.toString(),
-        name: item.name,
-        subtitle: item.subtitle,
-        image: item.image,
-        slug: item.slug,
-      }))
-    : [];
+export default function Home() {
+  const collectionsPromise = getCollections();
 
   return (
     <>
       {/* Hero Carousel */}
-      <HeroCarousel collections={collections}></HeroCarousel>
+      <Suspense fallback={<HeroSkeleton></HeroSkeleton>}>
+        <HeroCarouselWrapper promise={collectionsPromise} />
+      </Suspense>
+
+      {/* Featured Products */}
+      <FeaturedProductsWrapper></FeaturedProductsWrapper>
+
+      {/* Brand Statement Section */}
+      <BrandStatement></BrandStatement>
 
       {/* Newsletter */}
       <Newsletter></Newsletter>

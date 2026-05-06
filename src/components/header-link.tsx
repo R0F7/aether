@@ -21,15 +21,12 @@ export function HeaderLink({
   return (
     <Link
       href={path}
-      className={`tracking-wide transition-colors ${
-        isSubRoute ? "text-sm" : "text-lg font-medium"
-      }
+      className={`tracking-wide transition-colors lg:text-sm 
+        ${isActive && "text-[#A08D65]"}
         ${
-          isActive
-            ? "text-[#A08D65]"
-            : isSubRoute
-              ? "text-muted-foreground hover:text-foreground"
-              : "hover:text-accent"
+          isSubRoute
+            ? "text-muted-foreground hover:text-foreground text-sm"
+            : "hover:text-accent uppercase font-medium text-lg"
         }`}
     >
       {children}
