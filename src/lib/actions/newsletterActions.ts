@@ -36,7 +36,14 @@ export async function newsletterActions(prevState: any, formData: FormData) {
       return { success: false, message: "This email is already subscribed." };
     }
 
-    await newsletter?.insertOne(data);
+    if (!newsletter) {
+      return {
+        success: false,
+        message: "Database connection unavailable. Please try again.",
+      };
+    }
+
+    await newsletter.insertOne(data);
     return { success: true, message: "Successfully subscribed!" };
   } catch (error) {
     return {

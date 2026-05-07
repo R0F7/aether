@@ -15,7 +15,7 @@ export default function Newsletter() {
           behind-the-scenes stories from our ateliers.
         </p>
 
-        <NewsletterForm></NewsletterForm>
+        <NewsletterForm />
       </div>
     </section>
   );

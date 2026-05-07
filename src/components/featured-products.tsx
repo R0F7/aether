@@ -1,9 +1,8 @@
 import { ProductCard } from "@/components/product-card";
-import { use } from "react";
 import { getProducts } from "@/lib/data";
 
-export function FeaturedProducts() {
-  const products = use(getProducts());
+export async function FeaturedProducts() {
+  const products = await getProducts();
 
   return (
     <>

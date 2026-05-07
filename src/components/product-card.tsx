@@ -1,14 +1,12 @@
-"use client"
-
-import Image from "next/image"
-import Link from "next/link"
-import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import type { Product } from "@/lib/mock-data"
+import Image from "next/image";
+import Link from "next/link";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import type { Product } from "@/lib/mock-data";
 
 interface ProductCardProps {
-  product: Product
+  product: Product;
 }
 
 export function ProductCard({ product }: ProductCardProps) {
@@ -31,7 +29,10 @@ export function ProductCard({ product }: ProductCardProps) {
               </Badge>
             )}
             {product.originalPrice && (
-              <Badge variant="secondary" className="absolute top-4 right-4 tracking-wider text-xs">
+              <Badge
+                variant="secondary"
+                className="absolute top-4 right-4 tracking-wider text-xs"
+              >
                 SALE
               </Badge>
             )}
@@ -46,7 +47,9 @@ export function ProductCard({ product }: ProductCardProps) {
             </Link>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-sm font-medium">${product.price.toLocaleString()}</span>
+            <span className="text-sm font-medium">
+              ${product.price.toLocaleString()}
+            </span>
             {product.originalPrice && (
               <span className="text-sm text-muted-foreground line-through">
                 ${product.originalPrice.toLocaleString()}
@@ -54,12 +57,16 @@ export function ProductCard({ product }: ProductCardProps) {
             )}
           </div>
           <Link href={`/shop/${product.slug}`} className="block pt-2">
-            <Button variant="outline" size="sm" className="w-full rounded-lg tracking-wider text-xs bg-transparent">
+            <Button
+              variant="outline"
+              size="sm"
+              className="w-full rounded-lg tracking-wider text-xs bg-transparent"
+            >
               VIEW PRODUCT
             </Button>
           </Link>
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }
