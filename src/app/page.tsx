@@ -37,6 +37,7 @@ export default async function Home() {
   const [collections] = await Promise.all([
     getCollections(),
   ]);
+console.log(collections);
 
   return (
     <>
