@@ -8,20 +8,23 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import type { Collection } from "@/lib/mock-data";
 
-export function HeroCarousel({ promises }: any) {
-  const collections: any = React.use(promises);
+interface HeroCarouselProps {
+  collections: Collection[];
+}
+
+export function HeroCarousel({ collections }: HeroCarouselProps) {
   const [currentIndex, setCurrentIndex] = React.useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = React.useState(true);
 
-  const nextSlide = () => {
+  const nextSlide = React.useCallback(() => {
     setCurrentIndex((prev) => (prev + 1) % collections.length);
-  };
+  }, [collections.length]);
 
-  const prevSlide = () => {
+  const prevSlide = React.useCallback(() => {
     setCurrentIndex(
       (prev) => (prev - 1 + collections.length) % collections.length,
     );
-  };
+  }, [collections.length]);
 
   const goToSlide = (index: number) => {
     setCurrentIndex(index);
@@ -44,7 +47,7 @@ export function HeroCarousel({ promises }: any) {
     >
       {/* Slides */}
       <div className="relative h-full">
-        {collections.map((collection: any, index: number) => (
+        {collections.map((collection, index) => (
           <div
             key={collection._id}
             className={cn(
@@ -126,7 +129,7 @@ export function HeroCarousel({ promises }: any) {
         role="tablist"
         aria-label="Carousel navigation"
       >
-        {collections.map((_: any, index: number) => (
+        {collections.map((_, index) => (
           <button
             key={index}
             onClick={() => goToSlide(index)}

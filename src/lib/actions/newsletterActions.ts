@@ -2,11 +2,12 @@
 
 import { headers } from "next/headers";
 import { NewsletterValidationSchema } from "../validationSchema/newsletterValidationSchema";
-import { db } from "../db";
+import { getCollection } from "../db";
 
 export async function newsletterActions(prevState: any, formData: FormData) {
   const email = formData.get("email");
   const headerList = await headers();
+  const newsletter = await getCollection("newsletter");
 
   const validatedFields = NewsletterValidationSchema.safeParse({ email });
   const ip = headerList.get("x-forwarded-for")?.split(",")[0] || "unknown";
@@ -27,7 +28,7 @@ export async function newsletterActions(prevState: any, formData: FormData) {
   };
 
   try {
-    const isExist = await db.collection("newsletter").findOne({
+    const isExist = await newsletter?.findOne({
       email: validatedFields.data.email,
     });
 
@@ -35,7 +36,14 @@ export async function newsletterActions(prevState: any, formData: FormData) {
       return { success: false, message: "This email is already subscribed." };
     }
 
-    await db.collection("newsletter").insertOne(data);
+    if (!newsletter) {
+      return {
+        success: false,
+        message: "Database connection unavailable. Please try again.",
+      };
+    }
+
+    await newsletter.insertOne(data);
     return { success: true, message: "Successfully subscribed!" };
   } catch (error) {
     return {

@@ -1,31 +1,18 @@
 import Newsletter from "@/components/newsletter";
 import BrandStatement from "@/components/brand-statement";
 import { Suspense } from "react";
-import { FeaturedProductsWrapper } from "@/components/featured-products-wrapper";
-import { HeroCarouselWrapper } from "@/components/hero-carousel-wrapper";
 import { HeroSkeleton } from "@/components/hero-skeleton";
 import SectionHeader from "@/components/section-header";
 import { ProductGridSkeleton } from "@/components/product-skeleton";
 import { FeaturedProducts } from "@/components/featured-products";
 import { HeroCarousel } from "@/components/hero-carousel";
-import { db } from "@/lib/db";
+import { getCollections } from "@/lib/data";
 
-// import { FeaturedProducts } from "@/components/featured-products";
-// import { HeroCarousel } from "@/components/hero-carousel";
-// import { getCollections, getProducts } from "@/lib/data";
-
-export default function Home() {
-  const collectionsPromise = db.collection("collections").find().toArray();
-
-  // re-setup vercel env
+export default async function Home() {
+  const collections = await getCollections();
   return (
     <>
-      {/* Hero Carousel */}
-      <Suspense fallback={<HeroSkeleton />}>
-        <HeroCarousel promises={collectionsPromise} />
-      </Suspense>
-
-      {/* Featured Products */}
+      <HeroCarousel collections={collections} />
 
       <section className="py-16 lg:py-24 px-6 lg:px-10">
         <div className="container mx-auto">
@@ -45,16 +32,3 @@ export default function Home() {
     </>
   );
 }
-
-// export default async function Home() {
-//   const [collections] = await Promise.all([
-//     getCollections(),
-//   ]);
-// console.log(collections);
-
-//   return (
-//     <>
-//       <HeroCarousel collections={collections} />
-//     </>
-//   );
-// }

@@ -1,5 +1,5 @@
 import { z } from "zod";
 
 export const NewsletterValidationSchema = z.object({
-  email: z.email("Invalid email address"),
+  email: z.string().email("Invalid email address").trim().lowercase(),
 });

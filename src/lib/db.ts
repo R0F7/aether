@@ -41,5 +41,15 @@ const client = new MongoClient(uri, {
 // The driver will internally queue operations until the connection is established
 export const db: Db = client.db(dbName);
 
+export async function getCollection(collectionName: string) {
+  try {
+    await client.connect();
+    return db.collection(collectionName);
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
 // 3. Export the client in case you need transactions or to close it
 export { client };
