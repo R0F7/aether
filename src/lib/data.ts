@@ -23,3 +23,16 @@ export async function getProducts() {
     _id: product._id.toString(),
   })) as Product[];
 }
+
+export async function getProduct(slug: string) {
+  const productCollection = await getCollection("products");
+
+  const productResult = await productCollection?.findOne({ slug });
+
+  if (!productResult) return null;
+
+  return {
+    ...productResult,
+    _id: productResult._id.toString(),
+  };
+}

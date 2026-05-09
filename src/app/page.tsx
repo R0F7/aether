@@ -10,6 +10,7 @@ import { getCollections } from "@/lib/data";
 
 export default async function Home() {
   const collections = await getCollections();
+  
   return (
     <>
       <HeroCarousel collections={collections} />

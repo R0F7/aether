@@ -25,7 +25,7 @@ import { Db, MongoClient, ServerApiVersion } from "mongodb";
 // }
 
 const uri = process.env.DB_URI!;
-const dbName = "aether"; // Replace with your actual DB name
+const dbName = "aether";
 
 if (!uri) {
   throw new Error("Please define the DB_URI environment variable");
