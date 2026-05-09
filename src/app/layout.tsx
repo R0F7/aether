@@ -6,6 +6,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
+import { CartProvider } from "@/lib/context/cart-context";
 
 const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
@@ -63,14 +64,15 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="min-h-screen flex flex-col">
-            <SiteHeader></SiteHeader>
+          <CartProvider>
+            <div className="min-h-screen flex flex-col">
+              <SiteHeader></SiteHeader>
+              <main className="flex-1">{children}</main>
 
-            <main className="flex-1">{children}</main>
-
-            <SiteFooter></SiteFooter>
-          </div>
-          <Toaster />
+              <SiteFooter></SiteFooter>
+            </div>
+            <Toaster />
+          </CartProvider>
         </ThemeProvider>
       </body>
     </html>

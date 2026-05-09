@@ -1,5 +1,6 @@
 import { getProduct, getProducts } from "@/lib/data";
 import ProductDetails from "@/components/product-details";
+import { notFound } from "next/navigation";
 
 export async function generateStaticParams() {
   const products = await getProducts();
@@ -16,6 +17,10 @@ export default async function ProductDetailPage({
 }) {
   const { slug } = await params;
   const product = await getProduct(slug);
+
+  if (!product) {
+    notFound();
+  }
 
   return <ProductDetails product={product} />;
 }

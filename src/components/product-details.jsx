@@ -1,41 +1,11 @@
-"use client";
-
-import { useState } from "react";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ChevronLeft } from "lucide-react";
 import { ProductGallery } from "@/components/product-gallery";
-import { SizeSelector, QuantitySelector } from "@/components/product-options";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { toast } from "sonner";
-// import { useCart } from "@/lib/cart-context"
+import ProductActions from "./product-actions";
 
 export default function ProductDetails({ product }) {
-  // const { addItem } = useCart()
-  const [selectedSize, setSelectedSize] = useState(product?.sizes[0] || "");
-  const [quantity, setQuantity] = useState(1);
-  if (!product) {
-    notFound();
-  }
-
-  const handleAddToCart = () => {
-    if (!selectedSize) {
-      toast("Please select a size", {
-        description: "Choose a size before adding to cart.",
-      });
-      return;
-    }
-
-    // TODO:
-    // addItem(product, quantity, selectedSize)
-
-    toast("product added successfully", {
-      description: `${product.name} (${selectedSize}) has been added to your cart.`,
-    });
-  };
-
   return (
     <div className="min-h-screen flex flex-col">
       {/* Breadcrumb */}
@@ -51,7 +21,6 @@ export default function ProductDetails({ product }) {
         </div>
       </div>
 
-      {/* Product Content */}
       <section className="py-10 lg:py-16 px-6 lg:px-10">
         <div className="container mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
@@ -95,27 +64,7 @@ export default function ProductDetails({ product }) {
                 {product.description}
               </p>
 
-              {/* Options */}
-              <div className="space-y-6 mb-8">
-                <SizeSelector
-                  sizes={product.sizes}
-                  selectedSize={selectedSize}
-                  onSizeChange={setSelectedSize}
-                />
-                <QuantitySelector
-                  quantity={quantity}
-                  onQuantityChange={setQuantity}
-                />
-              </div>
-
-              {/* Add to Cart */}
-              <Button
-                size="lg"
-                className="w-full h-14 rounded-xl bg-accent text-accent-foreground hover:bg-accent/90 tracking-widest text-sm"
-                onClick={handleAddToCart}
-              >
-                ADD TO CART
-              </Button>
+              <ProductActions product={product} />
 
               {/* Product Info Tabs */}
               <div className="mt-12">

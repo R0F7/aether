@@ -6,10 +6,11 @@ import { Search, ShoppingBag } from "lucide-react";
 import { ModeToggle } from "./mode-toggle";
 import Link from "next/link";
 import { CommandSearch } from "./command-search";
+import { useCart } from "@/hooks/useCart";
 
 export function HeaderActions() {
   const [searchOpen, setSearchOpen] = useState(false);
-  const totalItems = 0;
+ const { totalItems } = useCart()
 
   return (
     <>
