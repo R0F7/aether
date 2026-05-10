@@ -8,11 +8,19 @@ import { CartSummary } from "@/components/cart-summary";
 import { CheckoutSuccessDialog } from "@/components/checkout-success-dialog";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/hooks/useCart";
-import Link from "next/link";               
+import Link from "next/link";
+import Loading from "./loading";
 
 export default function CartContainer() {
   const router = useRouter();
-  const { items, subtotal, updateQuantity, removeItem, clearCart } = useCart();
+  const {
+    items,
+    subtotal,
+    updateQuantity,
+    removeItem,
+    clearCart,
+    isInitialized,
+  } = useCart();
   const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
@@ -23,6 +31,10 @@ export default function CartContainer() {
     setShowSuccess(true);
     clearCart();
   };
+
+  if (!isInitialized) {
+    return <Loading />;
+  }
 
   return (
     <>

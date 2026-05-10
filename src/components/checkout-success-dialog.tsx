@@ -32,7 +32,7 @@ export function CheckoutSuccessDialog({ open, onOpenChange, onContinueShopping }
 
         <div className="mt-6 space-y-3">
           <Button
-            className="w-full rounded-xl bg-accent text-accent-foreground hover:bg-accent/90 tracking-widest text-xs"
+            className="w-full rounded-xl bg-accent text-accent-foreground hover:bg-accent/90 tracking-widest text-xs py-4"
             onClick={onContinueShopping}
           >
             CONTINUE SHOPPING

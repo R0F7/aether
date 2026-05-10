@@ -10,7 +10,7 @@ import { useCart } from "@/hooks/useCart";
 
 export function HeaderActions() {
   const [searchOpen, setSearchOpen] = useState(false);
- const { totalItems } = useCart()
+  const { totalItems } = useCart();
 
   return (
     <>
