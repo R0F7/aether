@@ -2,7 +2,7 @@ import { ProductCard } from "@/components/product-card";
 import { getProducts } from "@/lib/data";
 
 export async function FeaturedProducts() {
-  const products = await getProducts();
+  const { products } = await getProducts({ page: 1, limit: 6 });
 
   return (
     <>

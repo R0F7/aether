@@ -1,5 +1,5 @@
 import { getCollection } from "./db";
-import { Collection, Product } from "./mock-data";
+import { Collection } from "./mock-data";
 
 export async function getCollections() {
   const collection = await getCollection("collections");
@@ -13,16 +13,6 @@ export async function getCollections() {
       }) as Collection,
   );
 }
-
-// export async function getProducts() {
-//   const productCollection = await getCollection("products");
-//   const productsResult = await productCollection?.find().toArray();
-
-//   return (productsResult || []).map((product) => ({
-//     ...product,
-//     _id: product._id.toString(),
-//   })) as Product[];
-// }
 
 export async function getProduct(slug: string) {
   const productCollection = await getCollection("products");
@@ -43,13 +33,17 @@ export async function getProducts({
   sort,
   min,
   max,
+  page = 1,
+  limit = 9,
 }: {
   category?: string;
   size?: string;
   sort?: string;
   min?: number;
   max?: number;
-}= {}) {
+  page?: number;
+  limit?: number;
+} = {}) {
   const collection = await getCollection("products");
 
   const query: any = {};
@@ -66,7 +60,7 @@ export async function getProducts({
     };
   }
 
-  // price range
+  // price
   if (min !== undefined || max !== undefined) {
     query.price = {};
 
@@ -99,15 +93,27 @@ export async function getProducts({
       sortQuery.isNew = -1;
   }
 
+  // total count
+  const totalProducts = await collection?.countDocuments(query);
+
+  // pagination
+  const skip = (page - 1) * limit;
+
   const products = await collection
     ?.find(query)
     .sort(sortQuery)
+    .skip(skip)
+    .limit(limit)
     .toArray();
 
-  return (
-    products?.map((product) => ({
-      ...product,
-      _id: product._id.toString(),
-    })) || []
-  );
+  return {
+    products:
+      products?.map((product) => ({
+        ...product,
+        _id: product._id.toString(),
+      })) || [],
+
+    totalProducts,
+    totalPages: Math.ceil((totalProducts || 0) / limit),
+  };
 }

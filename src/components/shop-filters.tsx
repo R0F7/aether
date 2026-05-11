@@ -1,11 +1,13 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Slider } from "@/components/ui/slider";
 import { Button } from "@/components/ui/button";
 import { categories, sizes } from "@/lib/mock-data";
+import { useDebounce } from "@/hooks/useDebounce";
 
 interface ShopFiltersProps {
   selectedCategory: string;
@@ -22,6 +24,24 @@ export function ShopFilters({
 }: ShopFiltersProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const [price, setPrice] = useState<[number, number]>([minPrice, maxPrice]);
+  const debouncedPrice = useDebounce(price, 600);
+  const isFirstRender = useRef(true);
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+
+    const params = new URLSearchParams(searchParams.toString());
+
+    if (debouncedPrice[0] !== minPrice || debouncedPrice[1] !== maxPrice) {
+      params.set("min", debouncedPrice[0].toString());
+      params.set("max", debouncedPrice[1].toString());
+      router.push(`/shop?${params.toString()}`, { scroll: false });
+    }
+  }, [debouncedPrice, maxPrice, minPrice, router, searchParams]);
 
   const updateFilter = (key: string, value: string) => {
     const params = new URLSearchParams(searchParams.toString());
@@ -32,19 +52,14 @@ export function ShopFilters({
       params.set(key, value);
     }
 
-    router.push(`/shop?${params.toString()}`);
-  };
+    // pagination reset
+    // params.delete("page");
 
-  const updatePrice = (value: number[]) => {
-    const params = new URLSearchParams(searchParams.toString());
-
-    params.set("min", value[0].toString());
-    params.set("max", value[1].toString());
-
-    router.push(`/shop?${params.toString()}`);
+    router.push(`/shop?${params.toString()}`, { scroll: false });
   };
 
   const handleReset = () => {
+    setPrice([0, 2000]);
     router.push("/shop");
   };
 
@@ -114,16 +129,16 @@ export function ShopFilters({
         </h3>
         <div className="px-1">
           <Slider
-            value={[minPrice, maxPrice]}
-            onValueChange={updatePrice}
+            value={price}
+            onValueChange={(value) => setPrice(value as [number, number])}
             min={0}
             max={2000}
             step={50}
             className="mb-4"
           />
           <div className="flex items-center justify-between text-sm text-muted-foreground">
-            <span>${minPrice.toLocaleString()}</span>
-            <span>${maxPrice.toLocaleString()}</span>
+            <span>${price[0].toLocaleString()}</span>
+            <span>${price[1].toLocaleString()}</span>
           </div>
         </div>
       </div>

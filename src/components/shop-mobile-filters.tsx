@@ -32,12 +32,10 @@ export function ShopMobileFilters({
         <Button
           variant="outline"
           size="sm"
-          className="lg:hidden rounded-lg tracking-wider text-xs gap-2 bg-transparent"
+          className="rounded-lg tracking-wider text-xs gap-2 bg-transparent"
         >
           <SlidersHorizontal className="h-4 w-4" />
-
           FILTERS
-
           {activeFiltersCount > 0 && (
             <span className="ml-1 h-5 w-5 rounded-full bg-accent text-accent-foreground text-xs flex items-center justify-center">
               {activeFiltersCount}
