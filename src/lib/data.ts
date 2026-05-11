@@ -117,3 +117,5 @@ export async function getProducts({
     totalPages: Math.ceil((totalProducts || 0) / limit),
   };
 }
+
+

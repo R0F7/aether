@@ -88,7 +88,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
                 />
               </Suspense>
 
-              {totalProducts > 0 && (
+              {(totalProducts ?? 0) > 0 && (
                 <div className="mt-8">
                   <ProductPagination
                     currentPage={page}

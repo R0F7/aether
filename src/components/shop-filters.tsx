@@ -41,7 +41,7 @@ export function ShopFilters({
       params.set("max", debouncedPrice[1].toString());
       router.push(`/shop?${params.toString()}`, { scroll: false });
     }
-  }, [debouncedPrice, maxPrice, minPrice, router, searchParams]);
+  }, [debouncedPrice]);
 
   const updateFilter = (key: string, value: string) => {
     const params = new URLSearchParams(searchParams.toString());

@@ -5,7 +5,7 @@ import { createProductAction } from "@/lib/actions/createProductActions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
-import { Loader2 } from "lucide-react";
+import { CircleAlert, CircleCheck, Loader2 } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -18,6 +18,7 @@ import { Checkbox } from "./ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 import { Label } from "./ui/label";
 import { Textarea } from "./ui/textarea";
+import { toast } from "sonner";
 
 export default function CreateProductForm() {
   const initialState = {
@@ -33,19 +34,27 @@ export default function CreateProductForm() {
 
   const inputs = state?.inputs as Record<string, any> | undefined;
 
+  if (state.message) {
+    const isSuccess = state.success;
+    const Icon = isSuccess ? CircleCheck : CircleAlert;
+    const textColor = isSuccess ? "text-green-600" : "text-red-600";
+
+    toast(
+      <div className={`flex items-center gap-2 ${textColor}`}>
+        <Icon size={18} strokeWidth={2.5} />
+        <span className="text-sm font-medium tracking-tight">
+          {state.message}
+        </span>
+      </div>,
+    );
+  }
+
   return (
     <div className="container max-w-xl mx-auto">
       <form
         action={formAction}
         className="w-full space-y-3 border p-6 rounded-xl"
       >
-        {state?.errors && (
-          <p className="text-red-500 text-sm">{state.message}</p>
-        )}
-        {state?.success && (
-          <p className="text-green-500 text-sm">{state.message}</p>
-        )}
-
         {/* name */}
         <Field>
           <FieldLabel htmlFor="name">
