@@ -1,31 +1,27 @@
-import { getCollection } from "./db";
-import { Collection } from "./mock-data";
+import { getCollection } from "@/lib/db";
+import { cache } from "react";
 
-export async function getCollections() {
+export const getCollections = cache(async function () {
   const collection = await getCollection("collections");
-  const collectionResult = await collection?.find().toArray();
+  const result = await collection?.find().toArray();
 
-  return (collectionResult || []).map(
-    (item) =>
-      ({
-        ...item,
-        _id: item._id.toString(),
-      }) as Collection,
-  );
-}
+  return (result || []).map((item) => ({
+    ...item,
+    _id: item._id.toString(),
+  }));
+});
 
-export async function getProduct(slug: string) {
-  const productCollection = await getCollection("products");
+export const getProduct = cache(async (slug: string) => {
+  const collection = await getCollection("products");
+  const result = await collection?.findOne({ slug });
 
-  const productResult = await productCollection?.findOne({ slug });
-
-  if (!productResult) return null;
+  if (!result) return null;
 
   return {
-    ...productResult,
-    _id: productResult._id.toString(),
+    ...result,
+    _id: result._id.toString(),
   };
-}
+});
 
 export async function getProducts({
   category,
@@ -117,5 +113,3 @@ export async function getProducts({
     totalPages: Math.ceil((totalProducts || 0) / limit),
   };
 }
-
-

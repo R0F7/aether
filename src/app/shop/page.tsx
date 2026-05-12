@@ -17,6 +17,8 @@ interface ShopPageProps {
   }>;
 }
 
+export const revalidate = 60;
+
 export default async function ShopPage({ searchParams }: ShopPageProps) {
   const params = await searchParams;
 

@@ -7,6 +7,8 @@ import { FeaturedProducts } from "@/components/featured-products";
 import { HeroCarousel } from "@/components/hero-carousel";
 import { getCollections } from "@/lib/data";
 
+export const revalidate = 600;
+
 export default async function Home() {
   const collections = await getCollections();
   
