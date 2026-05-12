@@ -1,7 +1,6 @@
 import Newsletter from "@/components/newsletter";
 import BrandStatement from "@/components/brand-statement";
 import { Suspense } from "react";
-import { HeroSkeleton } from "@/components/hero-skeleton";
 import SectionHeader from "@/components/section-header";
 import { ProductGridSkeleton } from "@/components/product-skeleton";
 import { FeaturedProducts } from "@/components/featured-products";
