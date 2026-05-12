@@ -1,11 +1,11 @@
 "use client";
 
 import { useActionState } from "react";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import { newsletterActions } from "@/lib/actions/newsletterActions";
 import { CircleAlert, CircleCheck, Loader2 } from "lucide-react";
 import { toast } from "sonner";
-import { Input } from "./ui/input";
+import { Input } from "../ui/input";
 
 export default function NewsletterForm() {
   const initialState = {
@@ -28,7 +28,7 @@ export default function NewsletterForm() {
     toast(
       <div className={`flex items-center gap-2 ${textColor}`}>
         <Icon size={18} strokeWidth={2.5} />
-        <span className="text-sm font-medium tracking-tight italic">
+        <span className="text-sm font-medium tracking-tight">
           {state.message}
         </span>
       </div>,

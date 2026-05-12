@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import { SizeSelector, QuantitySelector } from "@/components/product-options";
+import { SizeSelector, QuantitySelector } from "@/components/product/product-options";
 import { useCart } from "@/hooks/useCart";
 
 export default function ProductActions({ product }: any) {

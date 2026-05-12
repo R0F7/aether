@@ -2,11 +2,11 @@ import type React from "react";
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
 import "./globals.css";
-import { SiteHeader } from "@/components/site-header";
-import { SiteFooter } from "@/components/site-footer";
-import { ThemeProvider } from "@/components/theme-provider";
+import { SiteHeader } from "@/components/header/site-header";
+import { ThemeProvider } from "@/provider/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { CartProvider } from "@/lib/context/cart-context";
+import { SiteFooter } from "@/components/footer/site-footer";
 
 const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
@@ -66,10 +66,9 @@ export default function RootLayout({
         >
           <CartProvider>
             <div className="min-h-screen flex flex-col">
-              <SiteHeader></SiteHeader>
+              <SiteHeader/>
               <main className="flex-1">{children}</main>
-
-              <SiteFooter></SiteFooter>
+              <SiteFooter />
             </div>
             <Toaster />
           </CartProvider>

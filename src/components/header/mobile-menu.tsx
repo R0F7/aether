@@ -1,8 +1,8 @@
 "use client";
 
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Button } from "./ui/button";
 import { Menu } from "lucide-react";
+import { Button } from "../ui/button";
 import { HeaderLink } from "./header-link";
 
 export default function MobileMenu() {

@@ -14,12 +14,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Checkbox } from "./ui/checkbox";
-import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
-import { Label } from "./ui/label";
-import { Textarea } from "./ui/textarea";
+import FormLoadingOverlay from "../form-loading-overlay";
+import { Checkbox } from "../ui/checkbox";
+import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
+import { Label } from "../ui/label";
+import { Textarea } from "../ui/textarea";
 import { toast } from "sonner";
-import FormLoadingOverlay from "./form-loading-overlay";
 
 export default function CreateProductForm() {
   const initialState = {

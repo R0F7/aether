@@ -3,13 +3,13 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ShoppingBag } from "lucide-react";
-import { CartItemRow } from "@/components/cart-item-row";
-import { CartSummary } from "@/components/cart-summary";
+import { CartItemRow } from "@/components/cart/cart-item-row";
+import { CartSummary } from "@/components/cart/cart-summary";
 import { CheckoutSuccessDialog } from "@/components/checkout-success-dialog";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/hooks/useCart";
 import Link from "next/link";
-import Loading from "./loading";
+import Loading from "../loading";
 
 export default function CartContainer() {
   const router = useRouter();

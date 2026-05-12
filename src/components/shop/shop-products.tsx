@@ -1,7 +1,7 @@
-import { ProductCard } from "@/components/product-card";
-import EmptyProductFilterPage from "@/components/empty-product-filter-page";
+import { ProductCard } from "@/components/product/product-card";
+import EmptyProductFilterPage from "@/components/product/empty-product-filter-page";
 import { getProducts } from "@/lib/data";
-import ProductPagination from "./product-pagination";
+import ProductPagination from "../product/product-pagination";
 import { Product } from "@/lib/mock-data";
 
 export default async function ShopProducts({

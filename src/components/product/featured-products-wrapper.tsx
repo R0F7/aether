@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import SectionHeader from "./section-header";
-import { ProductGridSkeleton } from "./product-skeleton";
-import { FeaturedProducts } from "./featured-products";
+import { ProductGridSkeleton } from "./product/product-skeleton";
+import { FeaturedProducts } from "./product/featured-products";
 
 export function FeaturedProductsWrapper() {
   return (

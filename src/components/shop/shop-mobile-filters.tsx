@@ -9,7 +9,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { ShopFilters } from "@/components/shop-filters";
+import { ShopFilters } from "@/components/shop/shop-filters";
 
 interface ShopMobileFiltersProps {
   selectedCategory: string;

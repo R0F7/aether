@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ChevronLeft } from "lucide-react";
-import { ProductGallery } from "@/components/product-gallery";
+import { ProductGallery } from "@/components/product/product-gallery";
 import { Badge } from "@/components/ui/badge";
 import ProductActions from "./product-actions";
 

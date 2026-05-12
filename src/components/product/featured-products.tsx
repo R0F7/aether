@@ -1,5 +1,5 @@
 import { cache } from "react";
-import { ProductCard } from "@/components/product-card";
+import { ProductCard } from "@/components/product/product-card";
 import { getProducts } from "@/lib/data";
 
 const getFeaturedProducts = cache(async function () {

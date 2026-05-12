@@ -1,12 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "./ui/button";
 import { Search, ShoppingBag } from "lucide-react";
-import { ModeToggle } from "./mode-toggle";
 import Link from "next/link";
-import { CommandSearch } from "./command-search";
 import { useCart } from "@/hooks/useCart";
+import { CommandSearch } from "./command-search";
+import { Button } from "../ui/button";
+import { ModeToggle } from "./mode-toggle";
 
 export function HeaderActions() {
   const [searchOpen, setSearchOpen] = useState(false);

@@ -1,10 +1,11 @@
 import { Suspense } from "react";
 import PageHeader from "@/components/page-header";
-import { ShopFilters } from "@/components/shop-filters";
-import { ShopMobileFilters } from "@/components/shop-mobile-filters";
-import ShopSort from "@/components/shop-sort";
-import { ProductGridSkeleton } from "@/components/product-skeleton";
-import ShopProducts from "@/components/shop-products";
+import { ShopFilters } from "@/components/shop/shop-filters";
+import { ShopMobileFilters } from "@/components/shop/shop-mobile-filters";
+import ShopSort from "@/components/shop/shop-sort";
+import { ProductGridSkeleton } from "@/components/product/product-skeleton";
+import ShopProducts from "@/components/shop/shop-products";
+import { Metadata } from "next";
 
 interface ShopPageProps {
   searchParams: Promise<{
@@ -18,6 +19,34 @@ interface ShopPageProps {
 }
 
 export const revalidate = 60;
+
+export const metadata: Metadata = {
+  title: "Shop All | Aether - Premium Collection",
+  description:
+    "Browse our entire collection of minimalist and premium design pieces. Filter by category, size, and price to find your perfect match.",
+  openGraph: {
+    title: "Shop All | Aether - Premium Collection",
+    description:
+      "Explore the full Aether collection. Minimalist designs crafted for quality and style.",
+    images: [
+      {
+        url: "/shop-og-image.webp",
+        width: 1200,
+        height: 630,
+        alt: "Aether Shop Collection",
+      },
+    ],
+    siteName: "Aether",
+    type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Shop All | Aether",
+    description: "Discover premium minimalist pieces in our shop.",
+    images: ["/shop-og-image.webp"],
+  },
+};
 
 export default async function ShopPage({ searchParams }: ShopPageProps) {
   const params = await searchParams;

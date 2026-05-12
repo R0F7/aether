@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { HeaderLink } from "./header-link";
-import { HeaderActions } from "./header-actions";
 import MobileMenu from "./mobile-menu";
+import { HeaderActions } from "./header-actions";
 
 export function SiteHeader() {
   return (
@@ -9,7 +9,7 @@ export function SiteHeader() {
       <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
         <div className="container mx-auto flex h-16 items-center justify-between px-6 lg:px-10">
           {/* Mobile Menu */}
-          <MobileMenu></MobileMenu>
+          <MobileMenu />
 
           {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center gap-8">
@@ -27,7 +27,7 @@ export function SiteHeader() {
           </Link>
 
           {/* Actions */}
-          <HeaderActions></HeaderActions>
+          <HeaderActions />
         </div>
       </header>
     </>
