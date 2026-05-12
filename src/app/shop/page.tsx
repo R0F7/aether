@@ -5,8 +5,6 @@ import { ShopMobileFilters } from "@/components/shop-mobile-filters";
 import ShopSort from "@/components/shop-sort";
 import { ProductGridSkeleton } from "@/components/product-skeleton";
 import ShopProducts from "@/components/shop-products";
-import ProductPagination from "@/components/product-pagination";
-import { getProducts } from "@/lib/data";
 
 interface ShopPageProps {
   searchParams: Promise<{
@@ -29,19 +27,12 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
   const max = Number(params.max) || 2000;
   const page = Number(params.page) || 1;
 
-  const { products, totalProducts, totalPages } = await getProducts({
-    category,
-    size,
-    sort,
-    min,
-    max,
-    page,
-  });
-
   const activeFiltersCount =
     (category !== "all" ? 1 : 0) +
     (size ? 1 : 0) +
     (min > 0 || max < 2000 ? 1 : 0);
+
+  const suspenseKey = JSON.stringify({ category, size, sort, min, max, page });
 
   return (
     <>
@@ -63,7 +54,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
             </aside>
 
             <div className="flex-1">
-              <div className="flex items-center justify-between mb-8">
+              <div className="flex items-center justify-between lg:justify-end mb-8">
                 <div className="flex items-center gap-4 lg:hidden">
                   <ShopMobileFilters
                     selectedCategory={category}
@@ -74,28 +65,22 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
                   />
                 </div>
 
-                <span className="text-sm text-muted-foreground hidden md:block">
-                  {products.length} / {totalProducts} products
-                </span>
-
                 <ShopSort selectedSort={sort} />
               </div>
 
-              <Suspense fallback={<ProductGridSkeleton count={9} />}>
+              <Suspense
+                key={suspenseKey}
+                fallback={<ProductGridSkeleton count={9} />}
+              >
                 <ShopProducts
-                  products={products}
-                  totalProducts={totalProducts}
+                  category={category}
+                  size={size}
+                  sort={sort}
+                  min={min}
+                  max={max}
+                  page={page}
                 />
               </Suspense>
-
-              {(totalProducts ?? 0) > 0 && (
-                <div className="mt-8">
-                  <ProductPagination
-                    currentPage={page}
-                    totalPages={totalPages}
-                  />
-                </div>
-              )}
             </div>
           </div>
         </div>
