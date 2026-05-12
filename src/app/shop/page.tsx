@@ -81,7 +81,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
                 <ShopSort selectedSort={sort} />
               </div>
 
-              <Suspense fallback={<ProductGridSkeleton count={6} />}>
+              <Suspense fallback={<ProductGridSkeleton count={9} />}>
                 <ShopProducts
                   products={products}
                   totalProducts={totalProducts}
