@@ -32,7 +32,7 @@ export function ShopMobileFilters({
         <Button
           variant="outline"
           size="sm"
-          className="rounded-lg tracking-wider text-xs gap-2 bg-transparent"
+          className="rounded-lg tracking-wider text-xs gap-2 bg-transparent py-4.5"
         >
           <SlidersHorizontal className="h-4 w-4" />
           FILTERS

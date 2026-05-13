@@ -18,6 +18,7 @@ export default function MobileMenu() {
         <nav className="flex flex-col gap-6 mt-10 pl-6">
           <HeaderLink path="/">Home</HeaderLink>
           <HeaderLink path="/shop">Shop</HeaderLink>
+          <HeaderLink path="/create-product">Create Product</HeaderLink>
           <HeaderLink path="/shop?category=shirts" isSubRoute={true}>
             Shirts
           </HeaderLink>
